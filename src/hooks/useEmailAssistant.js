@@ -5,7 +5,7 @@ import { emailAssistantSchema } from '@/lib/schema/emailAssistantSchema'
 export function useEmailAssistant() {
   return useMutation({
     mutationFn: async (values) => {
-      emailAssistantSchema.parse(values) // Zod validation
+      emailAssistantSchema.parse(values);
 
       const res = await axiosInstance.post('/email/email-assist', values)
 

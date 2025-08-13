@@ -121,5 +121,27 @@ const sidebarItems = [
     },
 ];
 
+    const colorMap = {
+        tone: 'bg-blue-50 text-blue-700',
+        fileType: 'bg-green-50 text-green-700',
+        contentLength: 'bg-purple-50 text-purple-700',
+        summaryLength: 'bg-yellow-50 text-yellow-700',
+        resultLength: 'bg-yellow-50 text-yellow-700',
+        resumeLength: 'bg-pink-50 text-pink-700',
+        jobTextLength: 'bg-orange-50 text-orange-700',
+        language: 'bg-indigo-50 text-indigo-700',
+        codeLength: 'bg-purple-50 text-purple-700',
+        explanationLength: 'bg-yellow-50 text-yellow-700',
+        mode: 'bg-teal-50 text-teal-700',
+        recipient: 'bg-rose-50 text-rose-700',
+        inputLength: 'bg-fuchsia-50 text-fuchsia-700',
+        contextLength: 'bg-gray-50 text-gray-700',
+        responseLength: 'bg-green-50 text-green-700',
+        type: 'bg-cyan-50 text-cyan-700',
+        topic: 'bg-amber-50 text-amber-700',
+        quizLength: 'bg-violet-50 text-violet-700',
+        questionCount: 'bg-red-50 text-red-700'
+    }
 
-export { testimonials, tools, sidebarItems };
+
+export { testimonials, tools, sidebarItems, colorMap };

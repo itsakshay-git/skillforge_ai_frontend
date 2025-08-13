@@ -1,6 +1,5 @@
 import { useForm, Controller, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import Editor from '@monaco-editor/react'
 import { codeExplainerSchema } from '@/lib/schema/codeExplainerSchema'
 import { useCodeExplainer } from '@/hooks/useCodeExplainer'

@@ -8,8 +8,8 @@ export const useFeatureAnalytics = (routeType) => {
             const { data } = await axiosInstance.get(
                 `/user/analytics/${routeType}`
             );
-            return data.data; // returns analytics data object
+            return data.data;
         },
-        enabled: !!routeType, // only fetch when routeType is provided
+        enabled: !!routeType,
     });
 };

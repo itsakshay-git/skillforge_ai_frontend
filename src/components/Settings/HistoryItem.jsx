@@ -1,7 +1,9 @@
 import React from 'react'
 import { Trash2 } from 'lucide-react'
+import { colorMap } from '@/constant'
 
 const HistoryItem = ({ item, onDelete }) => {
+
     return (
         <li className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 relative hover:shadow-md transition-shadow duration-200">
             <button
@@ -31,21 +33,22 @@ const HistoryItem = ({ item, onDelete }) => {
                 </p>
             </div>
 
-              {/* Metadata */}
-            <div className="flex flex-wrap gap-2 mt-3">
-                <span className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md">
-                    Tone: {item.metadata?.tone}
-                </span>
-                <span className="px-2 py-1 bg-green-50 text-green-700 text-xs rounded-md">
-                    File: {item.metadata?.fileType}
-                </span>
-                <span className="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded-md">
-                    Length: {item.metadata?.contentLength}
-                </span>
-                <span className="px-2 py-1 bg-yellow-50 text-yellow-700 text-xs rounded-md">
-                    Summary: {item.metadata?.summaryLength}
-                </span>
-            </div>
+            {/* Dynamic Metadata */}
+            {item.metadata && (
+                <div className="flex flex-wrap gap-2 mt-3">
+                    {Object.entries(item.metadata).map(([key, value]) => {
+                        const colorClasses = colorMap[key] || 'bg-gray-100 text-gray-700'
+                        return (
+                            <span
+                                key={key}
+                                className={`px-2 py-1 ${colorClasses} text-xs rounded-md`}
+                            >
+                                {key}: {value}
+                            </span>
+                        )
+                    })}
+                </div>
+            )}
         </li>
     )
 }

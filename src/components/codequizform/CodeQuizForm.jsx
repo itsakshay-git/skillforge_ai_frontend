@@ -126,7 +126,7 @@ export default function CodeQuizForm() {
         <div
           className="bg-white/90 backdrop-blur-lg rounded-2xl shadow p-8 border border-gray-200 mt-10 md:mt-0 flex flex-col overflow-auto"
         >
-          <h2 className="text-2xl font-bold text-blue-700 mb-6">Generated Quiz</h2>
+          <h2 className="text-2xl font-bold mb-6">Generated Quiz</h2>
           {mutation.data ? (
             <>
               <pre className="bg-gray-50 rounded-lg p-6 border border-gray-300 font-mono text-sm whitespace-pre-wrap text-gray-800">

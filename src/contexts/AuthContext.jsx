@@ -22,10 +22,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (token) {
-            // Set the token in axios headers
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`
-
-            // Try to restore user data from localStorage first
             const savedUser = localStorage.getItem('skillforge_ai_user')
             if (savedUser) {
                 try {
@@ -34,15 +31,12 @@ export const AuthProvider = ({ children }) => {
                     console.error('Error parsing saved user data:', error)
                 }
             }
-
-            // Verify token and get user info
             verifyToken()
         } else {
             setLoading(false)
         }
     }, [token])
 
-    // Handle pending redirects after component mounts
     useEffect(() => {
         if (pendingRedirect && !loading) {
             navigate(pendingRedirect)
@@ -56,7 +50,6 @@ export const AuthProvider = ({ children }) => {
             if (response.data.user) {
                 setUser(response.data.user)
             } else {
-                // Token is invalid, remove it
                 localStorage.removeItem('skillforge_ai_token')
                 localStorage.removeItem('skillforge_ai_user')
                 setToken(null)
@@ -65,7 +58,6 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (error) {
             console.error('Token verification failed:', error)
-            // Token is invalid, remove it
             localStorage.removeItem('skillforge_ai_token')
             localStorage.removeItem('skillforge_ai_user')
             setToken(null)
@@ -81,7 +73,6 @@ export const AuthProvider = ({ children }) => {
             const { email, password } = credentials;
             const response = await axiosInstance.post('/auth/login', { email, password })
 
-            // Check if we have a token and user data (successful login)
             if (response.data.token && response.data.user) {
                 const { token: newToken, user: userData } = response.data
 
@@ -91,10 +82,8 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('skillforge_ai_user', JSON.stringify(userData))
                 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${newToken}`
 
-                // Show success toast
                 toast.success('Login successful! Welcome back!')
 
-                // Set pending redirect to dashboard
                 setPendingRedirect('/dashboard')
 
                 return { success: true }
@@ -115,12 +104,10 @@ export const AuthProvider = ({ children }) => {
             const { username, email, password } = credentials;
             const response = await axiosInstance.post('/auth/register', { username, email, password })
 
-            // Check if registration was successful (usually backend sends user data or success message)
             if (response.data.user || response.data.message?.includes('successful')) {
-                // Show success toast
+
                 toast.success('Registration successful! Please log in to continue.')
 
-                // Set pending redirect to home
                 setPendingRedirect('/')
 
                 return { success: true }
@@ -138,19 +125,16 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            // Call logout endpoint if available
             await axiosInstance.post('/auth/logout')
         } catch (error) {
             console.error('Logout error:', error)
         } finally {
-            // Clear local state regardless of API response
             setToken(null)
             setUser(null)
             localStorage.removeItem('skillforge_ai_token')
             localStorage.removeItem('skillforge_ai_user')
             axiosInstance.defaults.headers.common['Authorization'] = ''
-
-            // Show logout toast
+            
             toast.success('Logged out successfully')
         }
     }

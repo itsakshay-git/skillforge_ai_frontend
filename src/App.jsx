@@ -1,23 +1,20 @@
+import React, { Suspense, lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
-import CodeExplainer from "./components/codeexplainer/CodeExplainer"
-import CodeQuizForm from "./components/codequizform/CodeQuizForm"
-import EmailAssistant from "./components/email/EmailAssistant"
-import ResumeOptimizer from "./components/resumeoptimizer/ResumeOptimizer"
-import FileUpload from "./components/summarizer/FileUpload"
 import Navbar from "./components/layout/Navbar"
-import Home from "./pages/layout/Home"
 import "./index.css"
-import Settings from './pages/settings/Settings'
-import Dashboard from './pages/layout/Dashboard'
 
-// Protected Route component
+
+const Home = lazy(() => import("./pages/layout/Home"))
+const Dashboard = lazy(() => import("./pages/layout/Dashboard"))
+const Fallback = lazy(() => import("./pages/Fallback"))
+
+
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth()
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>
+    return <Fallback />
   }
 
   if (!isAuthenticated) {
@@ -28,29 +25,31 @@ const ProtectedRoute = ({ children }) => {
 }
 
 function AppRoutes() {
+  const legacyRoutes = [
+    { from: "/resume-optimizer", to: "/dashboard/resume" },
+    { from: "/summarizer", to: "/dashboard/summarizer" },
+    { from: "/code-explainer", to: "/dashboard/code-explainer" },
+    { from: "/email-assistant", to: "/dashboard/email" },
+    { from: "/code-quiz", to: "/dashboard/quiz" },
+    { from: "/settings", to: "/dashboard/settings" },
+  ]
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Routes>
-        <Route path="/" element={
-          <>
-            <Navbar />
-            <Home />
-          </>
-        } />
-        <Route path="/dashboard/*" element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        } />
+      <Suspense fallback={<Fallback />}>
+        <Routes>
+          <Route path="/" element={ <><Navbar /> <Home /></>} />
+          <Route path="/dashboard/*" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
 
-        {/* Legacy routes - redirect to dashboard */}
-        <Route path="/resume-optimizer" element={<Navigate to="/dashboard/resume" replace />} />
-        <Route path="/summarizer" element={<Navigate to="/dashboard/summarizer" replace />} />
-        <Route path="/code-explainer" element={<Navigate to="/dashboard/code-explainer" replace />} />
-        <Route path="/email-assistant" element={<Navigate to="/dashboard/email" replace />} />
-        <Route path="/code-quiz" element={<Navigate to="/dashboard/quiz" replace />} />
-        <Route path="/settings" element={<Navigate to="/dashboard/settings" replace />} />
-      </Routes>
+          {legacyRoutes.map(({ from, to }) => (
+            <Route key={from} path={from} element={<Navigate to={to} replace />} />
+          ))}
+        </Routes>
+      </Suspense>
     </div>
   )
 }

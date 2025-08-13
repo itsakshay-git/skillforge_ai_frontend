@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-        <footer className="flex justify-center bg-green-200">
+        <footer className="flex justify-center bg-green-200 bg-gradient-to-r from-teal-200 to-green-300-500">
           <div className="flex max-w-[1050px] flex-1 flex-col">
             <footer className="flex flex-col gap-6 px-5 py-5 @container">
               <div className="flex items-center justify-center gap-4 text-[#111418]">

@@ -22,7 +22,7 @@ export default function ResumeOptimizer() {
         if (fileInputRef.current) fileInputRef.current.value = ''
       },
       onError: (error) => {
-        // error handled below via mutation.error
+        console.error(error);
       },
     })
   }
@@ -86,9 +86,9 @@ export default function ResumeOptimizer() {
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-md font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={mutation.isLoading}
+              disabled={mutation.isPending}
             >
-              {mutation.isLoading ? 'Optimizing Resume...' : 'Optimize Resume'}
+              {mutation.isPending ? 'Optimizing Resume...' : 'Optimize Resume'}
             </button>
           </form>
         </div>
@@ -104,7 +104,7 @@ export default function ResumeOptimizer() {
           )}
 
           {mutation.data ? (
-            <div className="flex-1 overflow-auto bg-gray-50 p-4 rounded-lg border">
+            <div className="flex-1 overflow-auto bg-gray-50 p-4 rounded-lg border border-dashed">
               <p className="whitespace-pre-wrap text-gray-800">{mutation.data}</p>
               <div className="mt-4">
                 <button

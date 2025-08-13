@@ -5,7 +5,6 @@ import { codeQuizSchema } from '@/lib/schema/codeQuizSchema'
 export function useCodeQuiz() {
   return useMutation({
     mutationFn: async (values) => {
-      // Validate inputs
       codeQuizSchema.parse(values)
 
       const res = await axiosInstance.post('/codequiz/generate', values)

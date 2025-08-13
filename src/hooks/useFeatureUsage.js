@@ -6,7 +6,7 @@ export const useFeatureUsage = () => {
         queryKey: ["featureUsage"],
         queryFn: async () => {
             const { data } = await axiosInstance.get("/user/feature-usage");
-            return data.data; // returns array of features
+            return data.data;
         },
     });
 };
