@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { sidebarItems } from "@/constant";
-import Sidebar from "@/components/Dashboard/Sidebar";
-import TopBar from "@/components/Dashboard/TopBar";
-import DashboardHome from "@/components/Dashboard/DashboardHome";
+import Sidebar from "@/components/Dashboard/Sidebar.jsx";
+import TopBar from "@/components/Dashboard/TopBar.jsx";
+import DashboardHome from "@/components/Dashboard/DashboardHome.jsx";
 
 export default function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
