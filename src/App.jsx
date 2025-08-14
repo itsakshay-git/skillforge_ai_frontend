@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import Navbar from "./components/layout/Navbar"
 import "./index.css"
+import ErrorPage from './pages/error/ErrorPage'
 
 
 const Home = lazy(() => import("./pages/layout/Home"))
@@ -48,6 +49,9 @@ function AppRoutes() {
           {legacyRoutes.map(({ from, to }) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />
           ))}
+
+          {/* Catch-all route */}
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Suspense>
     </div>
