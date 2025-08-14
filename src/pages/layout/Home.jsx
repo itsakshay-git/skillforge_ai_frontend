@@ -55,7 +55,7 @@ export default function Home() {
               </div>
             </div>
 
-            <section className="px-4 pb-3 pt-5 rounded-2xl">
+            <section className="px-0 sm:px-4 pb-3 pt-5 rounded-2xl">
               <h2 className="text-[20px] font-bold text-[#111418] tracking-tight">Why Choose Our AI Tools?</h2>
               <div className="flex flex-col gap-10 py-10">
                 <div className="flex flex-col gap-4">
@@ -109,9 +109,9 @@ export default function Home() {
             </section>
 
             {/* Featured Tools */}
-            <h2 className="text-[#111418] text-4xl sm:text-6xl font-bold px-4 pb-3 pt-5">Featured Tools</h2>
+            <h2 className="text-[#111418] text-4xl sm:text-6xl font-bold px-0 sm:px-4 pb-3 pt-5">Featured Tools</h2>
             <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex items-stretch p-4 gap-3">
+              <div className="flex items-stretch px-0 py-4 sm:p-4 gap-3">
                 {[
                   {
                     title: "Resume Optimizer",
@@ -155,8 +155,8 @@ export default function Home() {
             </div>
 
             {/* All Tools */}
-            <h2 className="text-[#111418] text-4xl sm:text-6xl font-bold px-4 pb-3 pt-5">All Tools</h2>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-4">
+            <h2 className="text-[#111418] text-4xl sm:text-6xl font-bold px-0 sm:px-4 pb-3 pt-5">All Tools</h2>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 px-0 py-4 sm:p-4">
               {tools.map((tool, index) => (
                 <ToolCard key={index} {...tool} isAuthenticated={isAuthenticated} />
               ))}
