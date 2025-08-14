@@ -1,14 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import bgImage from "@/assets/skillai.png";
 import { testimonials, tools } from "@/constant";
 import Footer from "@/components/layout/Footer";
+import AuthModal from "@/components/auth/AuthModal";
 
 
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   return (
     <div
@@ -17,35 +19,35 @@ export default function Home() {
     >
       <div className="layout-container flex h-full grow flex-col">
         {/* Hero Section */}
-        <div className="px-20 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col flex-1">
-            <div className="@container">
-              <div className="@[480px]:p-4">
+        <div className="px-8 sm:px-20 flex flex-1 justify-center py-5">
+          <div className="flex flex-col w-full">
+            <div className="md:@container">
+              <div className="sm:w-full">
                 <div
-                  className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl justify-center p-[80px]"
+                  className="flex sm:w-full md:min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat justify-center p-5 sm:p-[80px] rounded-xl"
                   style={{
                     backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url(${bgImage})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
                 >
-                  <div className="flex flex-col gap-2">
-                    <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl">
+                  <div className="flex flex-col gap-2 p-2 sm:p-0">
+                    <h1 className="text-white text-2xl sm:text-4xl font-black leading-tight tracking-[-0.033em]">
                       Explore Our AI Tools
                     </h1>
-                    <h2 className="text-white text-sm font-normal @[480px]:text-base w-[400px]">
+                    <h2 className="text-white text-[10px] sm:text-sm font-normal @[480px]:text-base w-[250px] sm:w-[400px]">
                       Unlock the power of artificial intelligence with our suite of tools designed to enhance your productivity and creativity.
                     </h2>
                   </div>
                   {isAuthenticated ? (
                     <Link
                       to="/resume-optimizer"
-                      className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#3490f3] text-white text-sm font-bold tracking-[0.015em] @[480px]:text-base hover:bg-blue-700 transition-colors"
+                      className="flex w-[200px] sm:min-w-[84px] sm:max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#3490f3] text-white text-sm font-bold tracking-[0.015em] @[480px]:text-base hover:bg-blue-700 transition-colors"
                     >
                       <span className="truncate">Get Started</span>
                     </Link>
                   ) : (
-                    <div className="text-white text-sm">
+                    <div onClick={() => setShowAuthModal(true)} className="text-white text-sm hover:bg-[#3490f3] bg-blue-700 cursor-pointer p-2 rounded-full w-[250px]">
                       Please sign in to access our AI tools
                     </div>
                   )}
@@ -57,7 +59,7 @@ export default function Home() {
               <h2 className="text-[20px] font-bold text-[#111418] tracking-tight">Why Choose Our AI Tools?</h2>
               <div className="flex flex-col gap-10 py-10">
                 <div className="flex flex-col gap-4">
-                  <h1 className="text-8xl font-bold max-w-[720px] text-[#111418]">
+                  <h1 className="text-4xl sm:text-8xl font-bold max-w-[720px] text-[#111418]">
                     Experience the Benefits
                   </h1>
                   <p className="text-base max-w-[720px] text-[#111418]">
@@ -107,7 +109,7 @@ export default function Home() {
             </section>
 
             {/* Featured Tools */}
-            <h2 className="text-[#111418] text-6xl font-bold px-4 pb-3 pt-5">Featured Tools</h2>
+            <h2 className="text-[#111418] text-4xl sm:text-6xl font-bold px-4 pb-3 pt-5">Featured Tools</h2>
             <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <div className="flex items-stretch p-4 gap-3">
                 {[
@@ -153,7 +155,7 @@ export default function Home() {
             </div>
 
             {/* All Tools */}
-            <h2 className="text-[#111418] text-6xl font-bold px-4 pb-3 pt-5">All Tools</h2>
+            <h2 className="text-[#111418] text-4xl sm:text-6xl font-bold px-4 pb-3 pt-5">All Tools</h2>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-4">
               {tools.map((tool, index) => (
                 <ToolCard key={index} {...tool} isAuthenticated={isAuthenticated} />
@@ -162,7 +164,7 @@ export default function Home() {
 
             <section className="px-4 py-8 bg-gray-50 rounded-2xl my-10">
               <div className="container mx-auto px-4">
-                <h2 className="text-6xl font-bold text-center mb-8">What People Say</h2>
+                <h2 className="text-4xl sm:text-6xl font-bold text-center mb-8">What People Say</h2>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                   {testimonials.map((t, index) => (
                     <div
@@ -188,6 +190,10 @@ export default function Home() {
         {/* Footer */}
         <Footer />
       </div>
+                  <AuthModal
+                      isOpen={showAuthModal}
+                      onClose={() => setShowAuthModal(false)}
+                  />
     </div>
   );
 }

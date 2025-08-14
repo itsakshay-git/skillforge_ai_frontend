@@ -11,9 +11,7 @@ export default function FileUpload() {
   })
 
   const [selectedFileName, setSelectedFileName] = useState('')
-  const mutation = useFileUpload()
-
-  console.log('Loading state:', mutation)
+  const mutation = useFileUpload();
 
 const onSubmit = (values) => {
   mutation.mutate(values, {

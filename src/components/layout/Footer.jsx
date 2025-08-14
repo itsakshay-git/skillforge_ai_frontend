@@ -18,14 +18,14 @@ export default function Footer() {
                   SkillForge AI
                 </h2>
               </div>
-              <div className="flex items-center justify-center gap-4 text-[#111418] my-[50px]">
+              <div className="flex items-center justify-center flex-wrap gap-4 text-[#111418] my-[50px]">
                 <span className="p-2 px-4 border rounded-full">Code Explainer</span><span className="p-2 px-4 border rounded-full">Code to Quiz</span><span className="p-2 px-4 border rounded-full">Resume Analyzer</span><span className="p-2 px-4 border rounded-full">Email Assistant</span><span className="p-2 px-4 border rounded-full">Job Matcher</span>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-between">
-                <a className="text-[#60758a] text-base font-normal min-w-40" href="#">
+                <a className="text-[#60758a] text-base text-center font-normal min-w-40" href="#">
                   Terms of Service
                 </a>
-                <a className="text-[#60758a] text-base font-normal min-w-40" href="#">
+                <a className="text-[#60758a] text-base text-center font-normal min-w-40" href="#">
                   Privacy Policy
                 </a>
                 <p className="text-[#60758a] text-base font-normal">
