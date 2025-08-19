@@ -19,11 +19,11 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="flex h-screen bg-gray-50">
+        <div className="flex h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
             {/* Mobile overlay */}
             {sidebarOpen && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
                     onClick={() => setSidebarOpen(false)}
                 />
             )}
@@ -36,7 +36,9 @@ export default function Dashboard() {
 
             <div className="flex-1 flex flex-col overflow-hidden">
                 <TopBar setSidebarOpen={setSidebarOpen} title={currentItem.label} />
-                <div className="flex-1 overflow-auto">{renderContent()}</div>
+                <div className="flex-1 overflow-auto bg-gradient-to-br from-slate-50/30 via-white/20 to-blue-50/30">
+                    {renderContent()}
+                </div>
             </div>
         </div>
     );

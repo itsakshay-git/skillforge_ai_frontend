@@ -6,6 +6,10 @@ import {
     Brain,
     Settings as SettingsIcon,
     BarChart3,
+    FileCheck,
+    BookOpen,
+    MessageSquare,
+    Lightbulb,
 } from "lucide-react";
 
 import ResumeOptimizer from "@/components/resumeoptimizer/ResumeOptimizer";
@@ -14,9 +18,6 @@ import CodeExplainer from "@/components/codeexplainer/CodeExplainer";
 import EmailAssistant from "@/components/email/EmailAssistant";
 import CodeQuizForm from "@/components/codequizform/CodeQuizForm";
 import Settings from "@/pages/settings/Settings";
-
-
-
 
 const testimonials = [
     {
@@ -41,45 +42,43 @@ const testimonials = [
     }
 ];
 
-
 const tools = [
     {
-        icon: "📄",
+        icon: FileCheck,
         title: "Resume Optimizer",
         description: "Get instant feedback on your resume to improve your chances of landing your dream job.",
         path: "/resume-optimizer",
         requiresAuth: true
     },
     {
-        icon: "📚",
+        icon: BookOpen,
         title: "Document Summarizer",
         description: "Summarize long documents quickly and efficiently, saving you time and effort.",
         path: "/summarizer",
         requiresAuth: true
     },
     {
-        icon: "💻",
+        icon: Code,
         title: "Code Explainer",
         description: "Understand complex code with AI-powered explanations in multiple programming languages.",
         path: "/code-explainer",
         requiresAuth: true
     },
     {
-        icon: "📧",
+        icon: MessageSquare,
         title: "Email Assistant",
         description: "Craft professional and effective emails with ease using our AI-powered email writer.",
         path: "/email-assistant",
         requiresAuth: true
     },
     {
-        icon: "🧠",
+        icon: Lightbulb,
         title: "Code Quiz Generator",
         description: "Generate coding quizzes and interview questions to test your programming knowledge.",
         path: "/code-quiz",
         requiresAuth: true
     }
 ];
-
 
 const sidebarItems = [
     { icon: Home, label: "Dashboard", path: "/dashboard", component: null },
@@ -121,27 +120,26 @@ const sidebarItems = [
     },
 ];
 
-    const colorMap = {
-        tone: 'bg-blue-50 text-blue-700',
-        fileType: 'bg-green-50 text-green-700',
-        contentLength: 'bg-purple-50 text-purple-700',
-        summaryLength: 'bg-yellow-50 text-yellow-700',
-        resultLength: 'bg-yellow-50 text-yellow-700',
-        resumeLength: 'bg-pink-50 text-pink-700',
-        jobTextLength: 'bg-orange-50 text-orange-700',
-        language: 'bg-indigo-50 text-indigo-700',
-        codeLength: 'bg-purple-50 text-purple-700',
-        explanationLength: 'bg-yellow-50 text-yellow-700',
-        mode: 'bg-teal-50 text-teal-700',
-        recipient: 'bg-rose-50 text-rose-700',
-        inputLength: 'bg-fuchsia-50 text-fuchsia-700',
-        contextLength: 'bg-gray-50 text-gray-700',
-        responseLength: 'bg-green-50 text-green-700',
-        type: 'bg-cyan-50 text-cyan-700',
-        topic: 'bg-amber-50 text-amber-700',
-        quizLength: 'bg-violet-50 text-violet-700',
-        questionCount: 'bg-red-50 text-red-700'
-    }
-
+const colorMap = {
+    tone: 'bg-blue-50 text-blue-700',
+    fileType: 'bg-green-50 text-green-700',
+    contentLength: 'bg-purple-50 text-purple-700',
+    summaryLength: 'bg-yellow-50 text-yellow-700',
+    resultLength: 'bg-yellow-50 text-yellow-700',
+    resumeLength: 'bg-pink-50 text-pink-700',
+    jobTextLength: 'bg-orange-50 text-orange-700',
+    language: 'bg-indigo-50 text-indigo-700',
+    codeLength: 'bg-purple-50 text-purple-700',
+    explanationLength: 'bg-yellow-50 text-yellow-700',
+    mode: 'bg-teal-50 text-teal-700',
+    recipient: 'bg-rose-50 text-rose-700',
+    inputLength: 'bg-fuchsia-50 text-fuchsia-700',
+    contextLength: 'bg-gray-50 text-gray-700',
+    responseLength: 'bg-green-50 text-green-700',
+    type: 'bg-cyan-50 text-cyan-700',
+    topic: 'bg-amber-50 text-amber-700',
+    quizLength: 'bg-violet-50 text-violet-700',
+    questionCount: 'bg-red-50 text-red-700'
+}
 
 export { testimonials, tools, sidebarItems, colorMap };

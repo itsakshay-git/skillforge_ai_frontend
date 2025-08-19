@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
-import ConfirmModal from '@/components/models/ConfirmModal'
+import React, { useEffect, useRef } from 'react'
 import HistoryItem from './HistoryItem'
+import { Trash2, Clock, AlertCircle, Loader2 } from 'lucide-react'
 
-const HistoryTab = ({ loading, error, historyData, hasMore, onLoadMore, loadingMore, onDelete, onClear }) => {
+const HistoryTab = ({ loading, error, historyData, hasMore, onLoadMore, loadingMore, onDelete, onClear, onShowConfirmModal }) => {
     const loaderRef = useRef(null)
-    const [confirmState, setConfirmState] = useState({ isOpen: false, action: null, id: null })
 
     useEffect(() => {
         if (!hasMore || loadingMore) return
@@ -19,55 +17,94 @@ const HistoryTab = ({ loading, error, historyData, hasMore, onLoadMore, loadingM
         return () => observer.disconnect()
     }, [hasMore, loadingMore, onLoadMore])
 
-    const handleConfirm = async () => {
-        if (confirmState.action === 'delete') {
-            await onDelete(confirmState.id)
-            toast.success('History item deleted')
-        } else if (confirmState.action === 'clear') {
-            await onClear()
-            toast.success('All history cleared')
-        }
-        setConfirmState({ isOpen: false, action: null, id: null })
+
+
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center py-12">
+                <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-gray-100 rounded-2xl flex items-center justify-center mb-4">
+                    <Loader2 className="w-8 h-8 text-slate-500 animate-spin" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Loading History</h3>
+                <p className="text-gray-600 text-sm">Please wait while we fetch your usage history...</p>
+            </div>
+        )
     }
 
-    if (loading) return <p>Loading history...</p>
-    if (error) return <p className="text-red-600">Error: {error}</p>
-    if (historyData.length === 0) return <p>No history found.</p>
+    if (error) {
+        return (
+            <div className="bg-gradient-to-r from-red-50 to-pink-50 border border-red-200 rounded-xl p-6">
+                <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center">
+                        <AlertCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                        <p className="text-lg font-semibold text-red-800">Error Loading History</p>
+                        <p className="text-red-600">{error}</p>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    if (historyData.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center py-12">
+                <div className="w-20 h-20 bg-gradient-to-br from-slate-100 to-gray-100 rounded-2xl flex items-center justify-center mb-4">
+                    <Clock className="w-10 h-10 text-slate-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">No History Found</h3>
+                <p className="text-gray-600 text-sm text-center max-w-xs">
+                    You haven't used any AI tools yet. Start exploring our features to build your usage history!
+                </p>
+            </div>
+        )
+    }
 
     return (
-        <div>
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold">History</h2>
+        <div className="space-y-6">
+            {/* Header with Clear All Button */}
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-gradient-to-br from-slate-400 to-gray-500 rounded-xl flex items-center justify-center">
+                        <Clock className="w-4 h-4 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900">Usage History</h3>
+                </div>
                 <button
-                    onClick={() => setConfirmState({ isOpen: true, action: 'clear' })}
-                    className="text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                    onClick={() => onShowConfirmModal({ isOpen: true, action: 'clear' })}
+                    className="group flex items-center gap-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 rounded-xl font-medium transition-all duration-300 hover:shadow-lg hover:shadow-red-500/25 transform hover:-translate-y-1"
                 >
-                    Clear All
+                    <Trash2 className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Clear All</span>
                 </button>
             </div>
 
-            <ul className="space-y-4">
+            {/* History Items */}
+            <div className="space-y-4">
                 {historyData.map((item) => (
                     <HistoryItem
                         key={item.id}
                         item={item}
-                        onDelete={(id) => setConfirmState({ isOpen: true, action: 'delete', id })}
+                        onDelete={(id) => onShowConfirmModal({ isOpen: true, action: 'delete', id })}
                     />
                 ))}
-            </ul>
-            {hasMore && !loadingMore && <div ref={loaderRef} className="h-10" />}
-            {loadingMore && <p className="mt-4 text-gray-500">Loading more...</p>}
+            </div>
 
-            {/* Confirmation Modal */}
-            <ConfirmModal
-                isOpen={confirmState.isOpen}
-                title={confirmState.action === 'clear' ? 'Clear All History' : 'Delete History Item'}
-                message={confirmState.action === 'clear'
-                    ? 'Are you sure you want to clear all history? This action cannot be undone.'
-                    : 'Are you sure you want to delete this history item?'}
-                onConfirm={handleConfirm}
-                onCancel={() => setConfirmState({ isOpen: false, action: null, id: null })}
-            />
+            {/* Load More Section */}
+            {hasMore && !loadingMore && (
+                <div ref={loaderRef} className="h-10" />
+            )}
+
+            {loadingMore && (
+                <div className="flex items-center justify-center py-6">
+                    <div className="flex items-center gap-3 text-slate-600">
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span className="text-sm font-medium">Loading more history...</span>
+                    </div>
+                </div>
+            )}
+
         </div>
     )
 }

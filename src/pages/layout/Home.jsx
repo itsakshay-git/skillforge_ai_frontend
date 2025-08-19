@@ -6,112 +6,152 @@ import { testimonials, tools } from "@/constant";
 import Footer from "@/components/layout/Footer";
 import AuthModal from "@/components/auth/AuthModal";
 
-
-
 export default function Home() {
   const { isAuthenticated } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   return (
     <div
-      className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+      className="relative flex size-full min-h-screen flex-col bg-gradient-to-br from-slate-50 via-white to-blue-50 group/design-root overflow-x-hidden"
       style={{ fontFamily: 'Inter, "Noto Sans", sans-serif' }}
     >
       <div className="layout-container flex h-full grow flex-col">
         {/* Hero Section */}
-        <div className="px-8 sm:px-20 flex flex-1 justify-center py-5">
-          <div className="flex flex-col w-full">
+        <div className="px-4 sm:px-8 lg:px-20 flex flex-1 justify-center py-8 sm:py-12">
+          <div className="flex flex-col w-full max-w-7xl mx-auto">
             <div className="md:@container">
               <div className="sm:w-full">
                 <div
-                  className="flex sm:w-full md:min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat justify-center p-5 sm:p-[80px] rounded-xl"
+                  className="flex sm:w-full md:min-h-[520px] flex-col gap-8 bg-cover bg-center bg-no-repeat justify-center p-6 sm:p-16 lg:p-20 rounded-2xl relative overflow-hidden shadow-2xl"
                   style={{
-                    backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url(${bgImage})`,
+                    backgroundImage: `linear-gradient(135deg, rgba(59,130,246,0.9), rgba(147,51,234,0.8), rgba(0,0,0,0.7)), url(${bgImage})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
                 >
-                  <div className="flex flex-col gap-2 p-2 sm:p-0">
-                    <h1 className="text-white text-2xl sm:text-4xl font-black leading-tight tracking-[-0.033em]">
-                      Explore Our AI Tools
+                  {/* Floating elements for modern look */}
+                  <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+                  <div className="absolute bottom-8 left-8 w-16 h-16 bg-blue-400/20 rounded-full blur-lg"></div>
+
+                  <div className="flex flex-col gap-4 p-2 sm:p-0 relative z-10">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full w-fit border border-white/30">
+                      <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                      <span className="text-white/90 text-xs font-medium">AI-Powered Platform</span>
+                    </div>
+
+                    <h1 className="text-white text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
+                      Explore Our{" "}
+                      <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
+                        AI Tools
+                      </span>
                     </h1>
-                    <h2 className="text-white text-[10px] sm:text-sm font-normal @[480px]:text-base w-[250px] sm:w-[400px]">
+                    <h2 className="text-white/90 text-sm sm:text-lg lg:text-xl font-normal max-w-2xl leading-relaxed">
                       Unlock the power of artificial intelligence with our suite of tools designed to enhance your productivity and creativity.
                     </h2>
                   </div>
+
                   {isAuthenticated ? (
                     <Link
                       to="/resume-optimizer"
-                      className="flex w-[200px] sm:min-w-[84px] sm:max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#3490f3] text-white text-sm font-bold tracking-[0.015em] @[480px]:text-base hover:bg-blue-700 transition-colors"
+                      className="group relative inline-flex w-fit items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white font-bold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
                     >
-                      <span className="truncate">Get Started</span>
+                      <span className="relative z-10">Get Started</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </Link>
                   ) : (
-                    <div onClick={() => setShowAuthModal(true)} className="text-white text-sm hover:bg-[#3490f3] bg-blue-700 cursor-pointer p-2 rounded-full w-[250px]">
-                      Please sign in to access our AI tools
+                    <div
+                      onClick={() => setShowAuthModal(true)}
+                      className="group cursor-pointer inline-flex w-fit items-center gap-3 px-6 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full text-white font-medium hover:bg-white/30 transition-all duration-300 hover:scale-105"
+                    >
+                      <span className="whitespace-nowrap">Please sign in to access our AI tools</span>
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </div>
                   )}
                 </div>
               </div>
             </div>
 
-            <section className="px-0 sm:px-4 pb-3 pt-5 rounded-2xl">
-              <h2 className="text-[20px] font-bold text-[#111418] tracking-tight">Why Choose Our AI Tools?</h2>
-              <div className="flex flex-col gap-10 py-10">
-                <div className="flex flex-col gap-4">
-                  <h1 className="text-4xl sm:text-8xl font-bold max-w-[720px] text-[#111418]">
-                    Experience the Benefits
-                  </h1>
-                  <p className="text-base max-w-[720px] text-[#111418]">
-                    Discover how our AI tools can transform your work and personal life.
-                  </p>
+            {/* Why Choose Section */}
+            <section className="px-0 sm:px-4 pb-8 pt-16 rounded-xl">
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full mb-6">
+                  <span className="text-blue-600 font-semibold text-sm">Why Choose Us</span>
                 </div>
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
-                  {[
-                    {
-                      title: 'Save Time',
-                      desc: 'Our AI tools help you accomplish tasks faster, freeing up your time for other important activities.',
-                      icon: (
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                  Experience the{" "}
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Benefits
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                  Discover how our AI tools can transform your work and personal life with cutting-edge technology.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                {[
+                  {
+                    title: 'Save Time',
+                    desc: 'Our AI tools help you accomplish tasks faster, freeing up your time for other important activities.',
+                    icon: (
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
                           <path d="M128,24A104,104,0,1,0,232,128A104.11,104.11,0,0,0,128,24Zm0,192A88,88,0,1,1,216,128,88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z" />
                         </svg>
-                      )
-                    },
-                    {
-                      title: 'Improve Efficiency',
-                      desc: 'Streamline your workflow and achieve more with less effort using our intelligent tools.',
-                      icon: (
+                      </div>
+                    )
+                  },
+                  {
+                    title: 'Improve Efficiency',
+                    desc: 'Streamline your workflow and achieve more with less effort using our intelligent tools.',
+                    icon: (
+                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
                           <path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z" />
                         </svg>
-                      )
-                    },
-                    {
-                      title: 'Boost Creativity',
-                      desc: 'Unlock new possibilities and enhance your creative output with the power of AI.',
-                      icon: (
+                      </div>
+                    )
+                  },
+                  {
+                    title: 'Boost Creativity',
+                    desc: 'Unlock new possibilities and enhance your creative output with the power of AI.',
+                    icon: (
+                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
                           <path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM51.31,160,136,75.31,152.69,92,68,176.68ZM48,179.31,76.69,208H48Zm48,25.38L79.31,188,164,103.31,180.69,120Zm96-96L147.31,64l24-24L216,84.68Z" />
                         </svg>
-                      )
-                    }
-                  ].map((feature, index) => (
-                    <div key={index} className="flex flex-col gap-3 p-4 rounded-lg bg-green-200">
-                      <div className="text-[#111418]">{feature.icon}</div>
-                      <div className="flex flex-col gap-1">
-                        <h2 className="text-base font-bold text-[#111418]">{feature.title}</h2>
-                        <p className="text-sm text-[#60758a]">{feature.desc}</p>
                       </div>
+                    )
+                  }
+                ].map((feature, index) => (
+                  <div key={index} className="group p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div className="mb-4">{feature.icon}</div>
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{feature.title}</h3>
+                      <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </section>
 
             {/* Featured Tools */}
-            <h2 className="text-[#111418] text-4xl sm:text-6xl font-bold px-0 sm:px-4 pb-3 pt-5">Featured Tools</h2>
-            <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex items-stretch px-0 py-4 sm:p-4 gap-3">
+            <section className="px-0 sm:px-4 pb-8 pt-20">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                  Featured{" "}
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Tools
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Our most popular AI-powered solutions designed to enhance your productivity
+                </p>
+              </div>
+
+              <div className="flex justify-center overflow-x-auto scrollbar-hide gap-6 pb-6">
                 {[
                   {
                     title: "Resume Optimizer",
@@ -132,56 +172,84 @@ export default function Home() {
                     path: "/email-assistant"
                   },
                 ].map(({ title, desc, img, path }) => (
-                  <div key={title} className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
-                    <div
-                      className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-                      style={{ backgroundImage: `url(${img})` }}
-                    ></div>
-                    <div>
-                      <p className="text-[#111418] text-base font-medium">{title}</p>
-                      <p className="text-[#60758a] text-sm font-normal">{desc}</p>
-                      {isAuthenticated && (
-                        <Link
-                          to={path}
-                          className="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium"
-                        >
-                          Try Now →
-                        </Link>
-                      )}
+                  <div key={title} className="flex-shrink-0 w-80 group">
+                    <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden border border-gray-100">
+                      <div
+                        className="w-full bg-center bg-no-repeat aspect-video bg-cover group-hover:scale-105 transition-transform duration-300"
+                        style={{ backgroundImage: `url(${img})` }}
+                      ></div>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">{title}</h3>
+                        <p className="text-gray-600 mb-4 leading-relaxed">{desc}</p>
+                        {isAuthenticated && (
+                          <Link
+                            to={path}
+                            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold group/link"
+                          >
+                            Try Now
+                            <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
 
             {/* All Tools */}
-            <h2 className="text-[#111418] text-4xl sm:text-6xl font-bold px-0 sm:px-4 pb-3 pt-5">All Tools</h2>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 px-0 py-4 sm:p-4">
-              {tools.map((tool, index) => (
-                <ToolCard key={index} {...tool} isAuthenticated={isAuthenticated} />
-              ))}
-            </div>
+            <section className="px-0 sm:px-4 pb-8 pt-20">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                  All{" "}
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Tools
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Explore our complete collection of AI-powered solutions
+                </p>
+              </div>
 
-            <section className="px-4 py-8 bg-gray-50 rounded-2xl my-10">
-              <div className="container mx-auto px-4">
-                <h2 className="text-4xl sm:text-6xl font-bold text-center mb-8">What People Say</h2>
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                  {testimonials.map((t, index) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {tools.map((tool, index) => (
+                  <ToolCard key={index} {...tool} isAuthenticated={isAuthenticated} />
+                ))}
+              </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <section className="px-4 py-16 bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl my-16">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                  What People{" "}
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Say
+                  </span>
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Hear from our satisfied users about their experience with our AI tools
+                </p>
+              </div>
+
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {testimonials.map((t, index) => (
+                  <div
+                    key={index}
+                    className="group bg-white rounded-2xl shadow-sm hover:shadow-xl p-6 transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                  >
                     <div
-                      key={index}
-                      className="flex flex-col gap-4 rounded-lg bg-white shadow p-4"
-                    >
-                      <div
-                        className="w-full bg-center bg-no-repeat bg-cover rounded-xl h-[200px]"
-                        style={{ backgroundImage: `url(${t.img})` }}
-                      ></div>
-                      <div>
-                        <p className="text-[#121417] text-base font-medium">{t.text}</p>
-                        <p className="text-[#677583] text-sm">{t.author}</p>
-                      </div>
+                      className="w-full bg-center bg-no-repeat bg-cover rounded-xl h-48 mb-4 group-hover:scale-105 transition-transform duration-300"
+                      style={{ backgroundImage: `url(${t.img})` }}
+                    ></div>
+                    <div>
+                      <p className="text-gray-800 text-base font-medium mb-3 leading-relaxed">{t.text}</p>
+                      <p className="text-gray-600 text-sm font-semibold">{t.author}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </section>
           </div>
@@ -190,22 +258,27 @@ export default function Home() {
         {/* Footer */}
         <Footer />
       </div>
-                  <AuthModal
-                      isOpen={showAuthModal}
-                      onClose={() => setShowAuthModal(false)}
-                  />
+
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
     </div>
   );
 }
 
-export const ToolCard = ({ icon, title, description, path, requiresAuth, isAuthenticated }) => {
+export const ToolCard = ({ icon: IconComponent, title, description, path, requiresAuth, isAuthenticated }) => {
   if (requiresAuth && !isAuthenticated) {
     return (
-      <div className="border border-gray-200 rounded-xl p-4 shadow text-left hover:shadow-md transition-all cursor-pointer hover:scale-105">
-        <div className="text-2xl mb-2">{icon}</div>
-        <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
-        <p className="text-sm text-gray-600 mt-1">{description}</p>
-        <p className="text-xs text-gray-500 mt-2">Sign in required</p>
+      <div className="group bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+        <div className="text-3xl mb-4 text-gray-400 group-hover:text-gray-600 transition-colors">
+          <IconComponent className="w-8 h-8" />
+        </div>
+        <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+        <p className="text-gray-600 mb-3 leading-relaxed">{description}</p>
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full">
+          <span className="text-xs text-gray-500 font-medium">Sign in required</span>
+        </div>
       </div>
     );
   }
@@ -213,12 +286,19 @@ export const ToolCard = ({ icon, title, description, path, requiresAuth, isAuthe
   return (
     <Link
       to={path}
-      className="bg-white border border-gray-200 rounded-xl p-4 shadow hover:shadow-md transition-all cursor-pointer text-left block hover:scale-105"
+      className="group bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 block"
     >
-      <div className="text-2xl mb-2">{icon}</div>
-      <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
-      <p className="text-sm text-gray-600 mt-1">{description}</p>
-      <p className="text-xs text-blue-600 mt-2">Try Now →</p>
+      <div className="text-3xl mb-4 text-blue-600 group-hover:text-purple-600 transition-colors">
+        <IconComponent className="w-8 h-8" />
+      </div>
+      <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">{title}</h3>
+      <p className="text-gray-600 mb-3 leading-relaxed">{description}</p>
+      <div className="inline-flex items-center gap-2 text-blue-600 font-semibold group-hover:text-purple-600 transition-colors">
+        <span>Try Now</span>
+        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
     </Link>
   );
 };

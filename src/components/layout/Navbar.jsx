@@ -18,8 +18,20 @@ export default function Navbar() {
                 <div className="sm:px-25 px-6">
                     <div className="flex justify-between h-16">
                         <div className="flex items-center">
-                            <div className="flex-shrink-0 flex items-center">
-                                <span className="ml-2 text-xl font-bold text-gray-900">
+                            <div className="flex-shrink-0 flex items-center gap-3">
+                                <div className="relative">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white">
+                                            <path
+                                                d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
+                                                fill="currentColor"
+                                            />
+                                        </svg>
+                                    </div>
+                                    {/* Glow effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl blur-lg opacity-30"></div>
+                                </div>
+                                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                                     SkillForge AI
                                 </span>
                             </div>
